@@ -264,7 +264,7 @@ export default function Dashboard() {
                           amount="₦120,000,000.00"
                           description="Total Inflow"
                           imageUrl="/assets/green_down.svg"
-                          color="#4545FE"
+                          color="text-[#4545FE]"
                           percentageChange="2.5%"
                         />
                       </div>
@@ -273,7 +273,7 @@ export default function Dashboard() {
                           amount="₦50,000,000.00"
                           description="MRR"
                           imageUrl="/assets/green_down.svg"
-                          color="#12B76A"
+                          color="text-[#12B76A]"
                           percentageChange="2.5%"
                         />
                       </div>
@@ -284,7 +284,7 @@ export default function Dashboard() {
                           amount="₦200,000,000.00"
                           description="Commission Revenue"
                           imageUrl="/assets/green_down.svg"
-                          color="#14B8A6"
+                          color="text-[#14B8A6]"
                           percentageChange="0.5%"
                         />
                       </div>
@@ -293,7 +293,7 @@ export default function Dashboard() {
                           amount="₦100,000,000.00"
                           description="GMV"
                           imageUrl="/assets/red_down.svg"
-                          color="#F04438"
+                          color="text-[#F04438]"
                           percentageChange="0.5%"
                           redAlert={true}
                         />

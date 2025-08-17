@@ -19,7 +19,7 @@ export default function OverviewCard({
   return (
     <div className="!w-full !p-3 !border !border-[#E4E4E4] rounded-2xl">
       <div>
-        <div className={`text-[${color}] text-[19px]`}>{amount}</div>
+        <div className={`${color} text-[19px] font-semibold`}>{amount}</div>
         <div className="flex items-center text-[10px] gap-x-2">
           <div>{description}</div>
           {redAlert ? (
