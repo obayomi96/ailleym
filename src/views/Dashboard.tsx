@@ -388,15 +388,17 @@ export default function Dashboard() {
 
       <Drawer
         direction="right"
-        modal={false}
-        preventScrollRestoration={true}
         open={open}
-        onOpenChange={(isOpen) => {
-          setOpen(isOpen);
-        }}
+        onOpenChange={setOpen}
+        preventScrollRestoration
+        noBodyStyles
       >
         <DrawerTrigger ref={drawerRef}></DrawerTrigger>
-        <DrawerContent className="bg-[#0D0D0D] border-none">
+        <DrawerContent
+          onEscapeKeyDown={(e) => e.preventDefault()}
+          onCloseAutoFocus={(e) => e.preventDefault()}
+          className="bg-[#0D0D0D] border-none"
+        >
           <div className="mx-auto w-full max-w-sm h-full">
             <DrawerHeader className="!p-5 bg-[#171717]">
               <DrawerTitle className="text-white w-full flex items-center justify-between">
