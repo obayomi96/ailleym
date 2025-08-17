@@ -43,7 +43,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           <div className="w-full h-full flex">
             <div className="w-[2rem] h-full">
               <img
-                src="../../src/assets/tiny_search.svg"
+                src="/assets/tiny_search.svg"
                 alt="search icon"
                 className="w-5 h-5 p-2 rounded-md"
               />
@@ -63,7 +63,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
               <img
                 onClick={setValue}
                 alt=""
-                src="../../src/assets/close_circle.svg"
+                src="/assets/close_circle.svg"
                 className="mr-2"
               />
             )}

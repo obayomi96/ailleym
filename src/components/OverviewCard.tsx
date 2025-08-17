@@ -22,13 +22,15 @@ export default function OverviewCard({
         <div className={`text-[${color}] text-[19px]`}>{amount}</div>
         <div className="flex items-center text-[10px] gap-x-2">
           <div>{description}</div>
-          <div
-            className={`text-${
-              redAlert ? "red" : "green"
-            }-500 flex items-center`}
-          >
-            <img src={imageUrl} alt="percentage icon" /> {percentageChange}
-          </div>
+          {redAlert ? (
+            <div className="text-red-500 flex items-center">
+              <img src={imageUrl} alt="percentage icon" /> {percentageChange}
+            </div>
+          ) : (
+            <div className={`text-green-500 flex items-center"`}>
+              <img src={imageUrl} alt="percentage icon" /> {percentageChange}
+            </div>
+          )}
         </div>
       </div>
     </div>

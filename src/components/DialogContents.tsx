@@ -6,10 +6,7 @@ export default function DialogContents() {
     <div className="w-[344px] flex flex-col items-center gap-y-3 px-auto !py-6 !mx-auto justify-center align-middle box-border">
       <div className="flex items-center gap-x-3 w-full justify-center">
         <div>
-          <img
-            src="../../src/assets/modal_settings.svg"
-            alt="Modal settings Icon"
-          />
+          <img src="/assets/modal_settings.svg" alt="Modal settings Icon" />
         </div>
         <div className="flex flex-col gap-y-1">
           <div className="text-base font-semibold text-[#191919]">
@@ -22,10 +19,7 @@ export default function DialogContents() {
       </div>
       <div className="flex items-center gap-x-3 w-full justify-center">
         <div>
-          <img
-            src="../../src/assets/modal_trend.svg"
-            alt="Modal settings Icon"
-          />
+          <img src="/assets/modal_trend.svg" alt="Modal settings Icon" />
         </div>
         <div className="flex flex-col gap-y-1">
           <div className="text-base font-semibold text-[#191919]">
@@ -38,10 +32,7 @@ export default function DialogContents() {
       </div>
       <div className="flex items-center gap-x-3 w-full justify-center">
         <div>
-          <img
-            src="../../src/assets/modal_metric.svg"
-            alt="Modal settings Icon"
-          />
+          <img src="/assets/modal_metric.svg" alt="Modal settings Icon" />
         </div>
         <div className="flex flex-col gap-y-1">
           <div className="text-base font-semibold text-[#191919]">

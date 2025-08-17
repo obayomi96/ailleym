@@ -1,12 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState, type RefObject } from "react";
 import HomeIcon from "../components/svgs/HomeIcon";
 import { Button } from "@/components/ui/button";
 import ListingIcon from "@/components/svgs/ListingsIcon";
 import UsersIcon from "@/components/svgs/UsersIcon";
 import RequestsIcon from "@/components/svgs/RequestsIcon";
 import ApplicationsIcon from "@/components/svgs/ApplicationsIcon";
-import { Bar, BarChart, XAxis, YAxis } from "recharts";
-import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Drawer,
@@ -31,36 +29,17 @@ import SearchField from "@/components/SearchField";
 import DialogContents from "@/components/DialogContents";
 import ChartContents from "@/components/ChartContents";
 import OverviewCard from "@/components/OverviewCard";
+import { set } from "date-fns";
 
 // I named the parent folder 'views' rather than 'pages' because I did not setup a routing system
-
-const chartData = [
-  { month: "Jan", income: 38.5, gvr: 15, mmr: 30 },
-  { month: "Feb", income: 10, gvr: 15, mmr: 30 },
-  { month: "Mar", income: 38, gvr: 10, mmr: 25 },
-  { month: "Apr", income: 25, gvr: 15, mmr: 38 },
-  { month: "May", income: 30, gvr: 20, mmr: 5 },
-  { month: "Jun", income: 38.5, gvr: 5, mmr: 47 },
-  { month: "Jul", income: 25, gvr: 18, mmr: 38 },
-  { month: "Aug", income: 25, gvr: 18, mmr: 8 },
-  { month: "Sep", income: 35, gvr: 8, mmr: 32 },
-];
-const chartConfig = {
-  gvr: {
-    label: "amount",
-    color: "#2563eb",
-  },
-  income: {
-    label: "amount",
-    color: "#60a5fa",
-  },
-} satisfies ChartConfig;
 
 export default function Dashboard() {
   const drawerRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLButtonElement>(null);
+  const topref = useRef<any>(null);
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [open, setOpen] = useState(false);
 
   return (
     <>
@@ -69,7 +48,7 @@ export default function Dashboard() {
           <div className="flex items-center justify-between px-10 h-full w-[89%] mx-auto">
             <div className="text-white font-bold text-lg flex items-center">
               <img
-                src="../../src/assets/Myxellia_logo.svg"
+                src="/assets/Myxellia_logo.svg"
                 alt="Company Logo"
                 width={153}
                 height={26}
@@ -83,7 +62,7 @@ export default function Dashboard() {
                     className="text-[#191919] p-3 font-light hover:bg-[#989898] transition-colors duration-300"
                   >
                     <img
-                      src="../../src/assets/notification_1.svg"
+                      src="/assets/Notification_1.svg"
                       alt="Notification Logo"
                     />
                   </Button>
@@ -92,24 +71,20 @@ export default function Dashboard() {
                   <Button
                     variant="ghost"
                     className="text-[#191919] p-3 font-light hover:bg-[#989898] transition-colors duration-300"
-                    onClick={() => dialogRef.current?.click()}
+                    onClick={(e) => dialogRef.current?.click()}
                   >
-                    <img
-                      src="../../src/assets/calculator.svg"
-                      alt="Calculator Logo"
-                    />
+                    <img src="/assets/calculator.svg" alt="Calculator Logo" />
                   </Button>
                 </li>
                 <li>
                   <Button
                     variant="ghost"
                     className="text-[#191919] p-3 font-light hover:bg-[#989898] transition-colors duration-300"
-                    onClick={() => drawerRef.current?.click()}
+                    onClick={(e) => {
+                      setOpen(true);
+                    }}
                   >
-                    <img
-                      src="../../src/assets/calendar.svg"
-                      alt="Calendar Logo"
-                    />
+                    <img src="/assets/calendar.svg" alt="Calendar Logo" />
                   </Button>
                 </li>
                 <li>
@@ -117,10 +92,7 @@ export default function Dashboard() {
                     variant="ghost"
                     className="text-[#191919] p-3 font-light hover:bg-[#989898] transition-colors duration-300"
                   >
-                    <img
-                      src="../../src/assets/message-notif.svg"
-                      alt="Message Logo"
-                    />
+                    <img src="/assets/message-notif.svg" alt="Message Logo" />
                   </Button>
                 </li>
                 <li>
@@ -267,7 +239,7 @@ export default function Dashboard() {
                     <div className="w-full h-full flex items-center justify-evenly">
                       <div>
                         <img
-                          src="../../src/assets/arrow_left.svg"
+                          src="/assets/arrow_left.svg"
                           alt="Graph"
                           width={18}
                           height={18}
@@ -276,7 +248,7 @@ export default function Dashboard() {
                       <ChartContents />
                       <div>
                         <img
-                          src="../../src/assets/arrow_right.svg"
+                          src="/assets/arrow_right.svg"
                           alt="Graph"
                           width={18}
                           height={18}
@@ -291,7 +263,7 @@ export default function Dashboard() {
                         <OverviewCard
                           amount="₦120,000,000.00"
                           description="Total Inflow"
-                          imageUrl="../../src/assets/green_down.svg"
+                          imageUrl="/assets/green_down.svg"
                           color="#4545FE"
                           percentageChange="2.5%"
                         />
@@ -300,7 +272,7 @@ export default function Dashboard() {
                         <OverviewCard
                           amount="₦50,000,000.00"
                           description="MRR"
-                          imageUrl="../../src/assets/green_down.svg"
+                          imageUrl="/assets/green_down.svg"
                           color="#12B76A"
                           percentageChange="2.5%"
                         />
@@ -311,7 +283,7 @@ export default function Dashboard() {
                         <OverviewCard
                           amount="₦200,000,000.00"
                           description="Commission Revenue"
-                          imageUrl="../../src/assets/green_down.svg"
+                          imageUrl="/assets/green_down.svg"
                           color="#14B8A6"
                           percentageChange="0.5%"
                         />
@@ -320,7 +292,7 @@ export default function Dashboard() {
                         <OverviewCard
                           amount="₦100,000,000.00"
                           description="GMV"
-                          imageUrl="../../src/assets/red_down.svg"
+                          imageUrl="/assets/red_down.svg"
                           color="#F04438"
                           percentageChange="0.5%"
                           redAlert={true}
@@ -335,11 +307,10 @@ export default function Dashboard() {
                   <CardHeader className="w-full h-[50px] bg-[#F9FAFB] !p-3 rounded-tl-[12.5px] rounded-tr-[12.5px]">
                     <CardTitle className="w-full flex items-center justify-between">
                       <div className="text-sm text-[#292929] flex items-center gap-x-2">
-                        <img src="../../src/assets/blue_home.svg" /> Listing
-                        Overview
+                        <img src="/assets/blue_home.svg" /> Listing Overview
                       </div>
                       <div className="text-xs text-[#4545FE] flex items-center gap-x-2 cursor-pointer">
-                        View all <img src="../../src/assets/blue_right.svg" />
+                        View all <img src="/assets/blue_right.svg" />
                       </div>
                     </CardTitle>
                   </CardHeader>
@@ -365,11 +336,11 @@ export default function Dashboard() {
                   <CardHeader className="w-full h-[50px] bg-[#F9FAFB] !p-3 rounded-tl-[12.5px] rounded-tr-[12.5px]">
                     <CardTitle className="w-full flex items-center justify-between">
                       <div className="text-sm text-[#292929] flex items-center gap-x-2">
-                        <img src="../../src/assets/Profile.svg" />
+                        <img src="/assets/profile.svg" />
                         Users Overview
                       </div>
                       <div className="text-xs text-[#4545FE] flex items-center gap-x-2 cursor-pointer">
-                        View all <img src="../../src/assets/blue_right.svg" />
+                        View all <img src="/assets/blue_right.svg" />
                       </div>
                     </CardTitle>
                   </CardHeader>
@@ -398,24 +369,32 @@ export default function Dashboard() {
               {/* Was unable to extrack the standalone images for styling, instead cound only download the grouped image with the overlay texts */}
               <div className="w-[89%] mx-auto !py-5 gap-x-3 grid grid-cols-3">
                 <div className="w-full">
-                  <img src="../../src/assets/item_3.png" alt="" />
+                  <img src="/assets/item_3.png" alt="" />
                 </div>
                 <div className="w-full">
-                  <img src="../../src/assets/item_1.png" alt="" />
+                  <img src="/assets/item_1.png" alt="" />
                 </div>
                 <div className="w-full">
-                  <img src="../../src/assets/item_2.png" alt="" />
+                  <img src="/assets/item_2.png" alt="" />
                 </div>
               </div>
               <div className="absolute right-18 bottom-30 ">
-                <img src="../../src/assets/chat_bot.svg" alt="chat bot icon" />
+                <img src="/assets/chat_bot.svg" alt="chat bot icon" />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <Drawer direction="right" disablePreventScroll={true}>
+      <Drawer
+        direction="right"
+        modal={false}
+        preventScrollRestoration={true}
+        open={open}
+        onOpenChange={(isOpen) => {
+          setOpen(isOpen);
+        }}
+      >
         <DrawerTrigger ref={drawerRef}></DrawerTrigger>
         <DrawerContent className="bg-[#0D0D0D] border-none">
           <div className="mx-auto w-full max-w-sm h-full">
@@ -423,16 +402,16 @@ export default function Dashboard() {
               <DrawerTitle className="text-white w-full flex items-center justify-between">
                 <div className="flex items-center gap-x-2">
                   <img
-                    src="../../src/assets/drawer_back.svg"
+                    src="/assets/drawer_back.svg"
                     alt=""
-                    onClick={() => drawerRef.current?.click()}
+                    onClick={() => setOpen(false)}
                   />{" "}
                   Calendar
                 </div>
                 <img
-                  src="../../src/assets/drawer_close.svg"
+                  src="/assets/drawer_close.svg"
                   alt="Close drawer"
-                  onClick={() => drawerRef.current?.click()}
+                  onClick={() => setOpen(false)}
                 />
               </DrawerTitle>
             </DrawerHeader>
@@ -446,14 +425,14 @@ export default function Dashboard() {
         </DrawerContent>
       </Drawer>
 
-      <Dialog>
+      <Dialog modal={false}>
         <DialogTrigger ref={dialogRef}></DialogTrigger>
         <DialogContent
           showCloseButton={false}
           className="border-none bg-none rounded-tr-2xl rounded-tl-2xl"
         >
           <DialogHeader className="bg-[#0C2841] !pt-6 !pr-6 !pl-6 rounded-tr-2xl rounded-tl-2xl">
-            <img src="../../src/assets/modal_banner.svg" alt="Modal banner" />
+            <img src="/assets/modal_banner.svg" alt="Modal banner" />
           </DialogHeader>
           <DialogContents />
         </DialogContent>
